@@ -20,6 +20,8 @@ You will probably see:
 
 ```
 origin  https://github.com/Stanford.../pintos.git
+or
+origin  https://github.com/fghanei/pintos.git
 ```
 
 ### 2. Change `origin` to point to **your fork**
