@@ -40,12 +40,8 @@ origin  https://github.com/dwc42/pintos.git
 ### 4. Pull your latest changes
 
 ```bash
-git pull origin main
-```
-
-If your branch is `master` instead of `main`, use:
-
-```bash
 git pull origin master
 ```
+
+
 
