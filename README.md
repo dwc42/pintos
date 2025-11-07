@@ -46,5 +46,10 @@ origin  https://github.com/dwc42/pintos.git
 git pull origin master
 ```
 
+### 5. Open vscode
+
+```bash
+code .
+```
 
 
