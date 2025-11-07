@@ -7,6 +7,9 @@ make sure the repo is not /pintos/pintos
 
 ## ✅ Steps To clone the repo without crashing the os. (From chat so might not work).
 
+### 0. Open a terminal
+open a terminal in the pintos/ directory
+
 ### 1. Check current remotes
 
 ```bash
