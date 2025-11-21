@@ -114,7 +114,6 @@ void thread_start(void)
   /* Start preemptive thread scheduling. */
   intr_enable();
 
-  
   /* Wait for the idle thread to initialize idle_thread. */
   sema_down(&idle_started);
 }
@@ -180,7 +179,7 @@ tid_t thread_create(const char *name, int priority,
 
   /* Initialize thread. */
   init_thread(t, name, priority);
-  printf("DBG: after init_thread tid=%d priority=%d (arg=%d)\n", t->tid, t->priority, priority);
+  // printf("DBG: after init_thread tid=%d priority=%d (arg=%d)\n", t->tid, t->priority, priority);
   tid = t->tid = allocate_tid();
 
   /* Stack frame for kernel_thread(). */
@@ -324,7 +323,7 @@ void thread_yield(void)
   old_level = intr_disable();
   if (cur != idle_thread)
     list_insert_ordered(&ready_list, &cur->elem, sortByPiority, NULL);
-  printf("yield: cur=%d pri=%d\n", cur->tid, cur->priority);
+  // printf("yield: cur=%d pri=%d\n", cur->tid, cur->priority);
   cur->status = THREAD_READY;
   schedule();
   intr_set_level(old_level);
@@ -516,11 +515,9 @@ next_thread_to_run(void)
 {
   if (list_empty(&ready_list))
     return idle_thread;
-  else
-  {
-    struct list_elem *threadElement = list_pop_front(&ready_list);
-    return list_entry(threadElement, struct thread, elem);
-  }
+
+  struct list_elem *threadElement = list_pop_front(&ready_list);
+  return list_entry(threadElement, struct thread, elem);
 }
 
 /* Completes a thread switch by activating the new thread's page
