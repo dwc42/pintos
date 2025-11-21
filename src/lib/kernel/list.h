@@ -178,4 +178,9 @@ void list_unique (struct list *, struct list *duplicates,
 struct list_elem *list_max (struct list *, list_less_func *, void *aux);
 struct list_elem *list_min (struct list *, list_less_func *, void *aux);
 
+/* Callback used by list_for_each: called for each element. */
+typedef void list_action_func (struct list_elem *elem, void *aux);
+
+/* Calls FUNC for each element of LIST (from front to back). */
+void list_for_each (struct list *list, list_action_func *func, void *aux);
 #endif /* lib/kernel/list.h */
