@@ -4,6 +4,13 @@
 #include <list.h>
 #include <stdbool.h>
 
+
+bool sortByPriority(const struct list_elem *a,
+                    const struct list_elem *b,
+                    void *aux);
+bool cond_sema_priority(const struct list_elem *a,
+                        const struct list_elem *b,
+                        void *aux);
 /* A counting semaphore. */
 struct semaphore 
   {
