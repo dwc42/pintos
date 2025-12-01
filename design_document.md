@@ -73,6 +73,15 @@
 > B2: Explain the data structure used to track priority donation.
 > Use ASCII art to diagram a nested donation.  (Alternately, submit a
 > .png file.)
+```c
+struct thread
+{
+   //added propeties
+   int base_priority;
+   struct lock *wait_on_lock; /*lock that the tread is waiting for*/
+   struct list donations; /*list of donations*/
+   struct list_elem donation_elem; /*Donation list Element */
+};```
 
 ### ALGORITHMS 
 
