@@ -21,6 +21,11 @@
 > preparing your submission, other than the Pintos documentation, course
 > text, lecture notes, and course staff.
 
+
+<!-- geroado-->
+<!-- geroado-->
+<!-- geroado-->
+<!-- geroado-->
 			     ALARM CLOCK
 			     ===========
 
@@ -51,6 +56,11 @@
 > A6: Why did you choose this design?  In what ways is it superior to
 > another design you considered?
 
+<!-- Dow and Dianel-->
+<!-- Dow and Dianel-->
+<!-- Dow and Dianel-->
+<!-- Dow and Dianel-->
+<!-- Dow and Dianel-->
 			 PRIORITY SCHEDULING
 			 ===================
 
