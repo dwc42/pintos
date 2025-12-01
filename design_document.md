@@ -117,7 +117,8 @@ struct thread
 
 > B7: Why did you choose this design?  In what ways is it superior to
 > another design you considered?
-It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
+
+ - It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
 
 			   SURVEY QUESTIONS
 			   ================
