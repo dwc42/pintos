@@ -16,11 +16,11 @@
 
 > If you have any preliminary comments on your submission, notes for the
 > TAs, or extra credit, please give them here.
-
+<!--
 > Please cite any offline or online sources you consulted while
 > preparing your submission, other than the Pintos documentation, course
 > text, lecture notes, and course staff.
-
+-->
 
 <!-- geroado-->
 <!-- geroado-->
@@ -75,7 +75,7 @@ struct thread
 {
    //added propeties
    int base_priority;
-   struct lock *wait_on_lock; /*lock that the tread is waiting for */
+   struct lock *wait_on_lock; /*lock that the tread is waiting for */4%E6j
    struct list donations; /*list of donations*/
    struct list_elem donation_elem; /*Donation list Element */
 };
