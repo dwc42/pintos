@@ -1,4 +1,3 @@
-#include "threads/thread.h"
 #include <debug.h>
 #include <stddef.h>
 #include <random.h>
@@ -10,6 +9,7 @@
 #include "threads/palloc.h"
 #include "threads/switch.h"
 #include "threads/synch.h"
+#include "threads/thread.h"
 #include "threads/vaddr.h"
 #ifdef USERPROG
 #include "userprog/process.h"
@@ -94,12 +94,12 @@ void thread_init(void)
   lock_init(&tid_lock);
   list_init(&ready_list);
   list_init(&all_list);
-
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread();
   init_thread(initial_thread, "main", PRI_DEFAULT);
   initial_thread->status = THREAD_RUNNING;
   initial_thread->tid = allocate_tid();
+  initial_thread->wait_on_lock = NULL;
 }
 
 /* Starts preemptive thread scheduling by enabling interrupts.
@@ -351,6 +351,11 @@ void thread_set_priority(int new_priority)
   ASSERT(new_priority <= PRI_MAX);
   ASSERT(new_priority >= PRI_MIN);
   enum intr_level old_level = intr_disable();
+  
+  struct thread *currentThread = thread_current();
+  currentThread->base_priority = new_priority;
+  recalculate_priority(currentThread);
+
   int old_priority = thread_current()->priority;
   thread_current()->priority = new_priority;
   bool yield = false;
@@ -486,7 +491,8 @@ init_thread(struct thread *t, const char *name, int priority)
   t->stack = (uint8_t *)t + PGSIZE;
   t->priority = priority;
   t->magic = THREAD_MAGIC;
-
+  t->wait_on_lock = NULL;
+  list_init(&t->donations);
   old_level = intr_disable();
   list_push_back(&all_list, &t->allelem);
   intr_set_level(old_level);

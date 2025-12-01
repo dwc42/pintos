@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Pintos",
+            "includePath": [
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/src/lib",
+                "${workspaceFolder}/src/lib/kernel",
+                "${workspaceFolder}/src/threads",
+                "${workspaceFolder}/src/devices"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99",
+            "intelliSenseMode": "linux-gcc-x86",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}
