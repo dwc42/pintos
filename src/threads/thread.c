@@ -353,22 +353,21 @@ void thread_set_priority(int new_priority)
   enum intr_level old_level = intr_disable();
   
   struct thread *currentThread = thread_current();
+  int old_priority = currentThread->priority;
   currentThread->base_priority = new_priority;
   recalculate_priority(currentThread);
 
-  int old_priority = thread_current()->priority;
-  thread_current()->priority = new_priority;
   bool yield = false;
   if (new_priority < old_priority && !list_empty(&ready_list))
   {
     struct thread *top = list_entry(list_front(&ready_list), struct thread, elem);
-    if (new_priority < top->priority)
-      yield = true;
+    if (currentThread->priority < top->priority) {
+      intr_set_level(old_level);
+      thread_yield();
+      return;
+    }
   }
   intr_set_level(old_level);
-  if (yield)
-    thread_yield();
-  return;
 }
 
 /* Returns the current thread's priority. */
@@ -490,6 +489,7 @@ init_thread(struct thread *t, const char *name, int priority)
   strlcpy(t->name, name, sizeof t->name);
   t->stack = (uint8_t *)t + PGSIZE;
   t->priority = priority;
+  t->base_priority = priority;
   t->magic = THREAD_MAGIC;
   t->wait_on_lock = NULL;
   list_init(&t->donations);
