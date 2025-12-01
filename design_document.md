@@ -75,7 +75,7 @@ struct thread
 {
    //added propeties
    int base_priority;
-   struct lock *wait_on_lock; /*lock that the tread is waiting for*/
+   struct lock *wait_on_lock; /*lock that the tread is waiting for */
    struct list donations; /*list of donations*/
    struct list_elem donation_elem; /*Donation list Element */
 };
@@ -83,6 +83,13 @@ struct thread
 > B2: Explain the data structure used to track priority donation.
 > Use ASCII art to diagram a nested donation.  (Alternately, submit a
 > .png file.)
+ - base_priority
+  Allows for the priority to be returned to the thread after the donations are done.
+ - wait_on_lock
+  Allows for nested chains of lock holders to have priority donation
+ - donations list and donation_elem  
+  These two allows for multiple priority donation. The list of threads that have donated priority to the thread that is waiting on. The list element that allows this thread to be inserted into another thread's donations list.
+
 ![nested donation diagram](images/nested%20donation%20diagram.png)
 ### ALGORITHMS 
 
@@ -100,11 +107,12 @@ struct thread
 > B6: Describe a potential race in thread_set_priority() and explain
 > how your implementation avoids it.  Can you use a lock to avoid
 > this race?
-
+I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
 ### RATIONALE 
 
 > B7: Why did you choose this design?  In what ways is it superior to
 > another design you considered?
+It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
 
 			   SURVEY QUESTIONS
 			   ================
