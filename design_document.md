@@ -8,9 +8,9 @@
 
 **Team Name:** Broken Pipe
 
- - Daniel Davis <email@tntech.edu>
+ - Daniel Davis <ddavis44@tntech.edu>
  - Dow Cox <dwcox42@tntech.edu>
- - Gerardo Ramirez <email@tntech.edu>
+ - Gerardo Ramirez <gramirez42@tntech.edu>
 
 ### PRELIMINARIES 
 
