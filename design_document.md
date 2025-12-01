@@ -111,7 +111,8 @@ struct thread
 > B6: Describe a potential race in thread_set_priority() and explain
 > how your implementation avoids it.  Can you use a lock to avoid
 > this race?
-I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
+
+ - I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
 ### RATIONALE 
 
 > B7: Why did you choose this design?  In what ways is it superior to
