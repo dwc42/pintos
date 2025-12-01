@@ -250,13 +250,17 @@ void lock_acquire(struct lock *lock)
   struct thread *currentThread = thread_current();
   if (lock->holder != NULL)
   {
+    enum intr_level old_level = intr_disable();
     currentThread->wait_on_lock = lock;
     list_insert_ordered(&lock->holder->donations, &currentThread->donation_elem, donationPriortySortCallback, NULL);
     donate_priority(lock->holder);
+    intr_set_level(old_level);
   }
   sema_down(&lock->semaphore);
+  enum intr_level old_level = intr_disable();
   lock->holder = currentThread;
   currentThread->wait_on_lock = NULL;
+  intr_set_level(old_level);
 }
 
 /* Tries to acquires LOCK and returns true if successful or false
