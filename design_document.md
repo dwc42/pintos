@@ -19,6 +19,7 @@
 
  - mlfqs-fair passing
   tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular  is fair.
+
 <!--
 > Please cite any offline or online sources you consulted while
 > preparing your submission, other than the Pintos documentation, course
@@ -110,12 +111,14 @@ struct thread
 > B6: Describe a potential race in thread_set_priority() and explain
 > how your implementation avoids it.  Can you use a lock to avoid
 > this race?
-I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
+
+ - I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
 ### RATIONALE 
 
 > B7: Why did you choose this design?  In what ways is it superior to
 > another design you considered?
-It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
+
+ - It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
 
 			   SURVEY QUESTIONS
 			   ================
