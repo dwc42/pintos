@@ -157,6 +157,8 @@ struct thread
 > B3: How do you ensure that the highest priority thread waiting for
 > a lock, semaphore, or condition variable wakes up first?
 
+ - We ensure the highest-priority thread wakes first by inserting waiting threads into each semaphore or condition variable's waiters list in strict priority order using comparator functions. We re-sort the waiters list before unblocking a thread in case there are any changes in priority that occur while threads are blocked. Since the list is always maintained in a sorted order, removal of the front element always wakes the highest-priority waiting thread.
+
 > B4: Describe the sequence of events when a call to lock_acquire()
 > causes a priority donation.  How is nested donation handled?
 
