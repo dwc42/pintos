@@ -103,6 +103,8 @@ struct thread
 > B4: Describe the sequence of events when a call to lock_acquire()
 > causes a priority donation.  How is nested donation handled?
 
+ - Once lock acquire is called the, there is a check to see if the hold is held. If it is held, then the thread sets the lock to wait on lock. The running thread inserts its self sorted into the holder thread's donations for multiple donations. Nested donation follows the pointer of wait_on_lock then holder then wait_on_lock etc until it reaches a null wait_on_lock, syncing the priority to the highest one. The thread blocks with sema_down(lock), the yields until the lock becomes available. Once it gets the lock wait_on_lock is set to null, become the lock holder, and continues with the donated donated until the lock is released.
+
 > B5: Describe the sequence of events when lock_release() is called
 > on a lock that a higher-priority thread is waiting for.
 
