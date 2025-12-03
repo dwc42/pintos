@@ -108,6 +108,8 @@ struct thread
 > B5: Describe the sequence of events when lock_release() is called
 > on a lock that a higher-priority thread is waiting for.
 
+ - When lock released it removed the donations for that lock, recalculates the highest priority of the chain of threads holding locks, and releases the lock with sema_up(lock).
+  
 ### SYNCHRONIZATION 
 
 > B6: Describe a potential race in thread_set_priority() and explain
