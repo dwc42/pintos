@@ -17,10 +17,14 @@
 > If you have any preliminary comments on your submission, notes for the
 > TAs, or extra credit, please give them here.
 
+ - mlfqs-fair passing
+  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular  is fair.
+
+<!--
 > Please cite any offline or online sources you consulted while
 > preparing your submission, other than the Pintos documentation, course
 > text, lecture notes, and course staff.
-
+-->
 
 <!-- geroado-->
 <!-- geroado-->
@@ -131,7 +135,7 @@ struct thread
 {
    //added propeties
    int base_priority;
-   struct lock *wait_on_lock; /*lock that the tread is waiting for */
+   struct lock *wait_on_lock; /*lock that the tread is waiting for */4%E6j
    struct list donations; /*list of donations*/
    struct list_elem donation_elem; /*Donation list Element */
 };
@@ -155,20 +159,26 @@ struct thread
 > B4: Describe the sequence of events when a call to lock_acquire()
 > causes a priority donation.  How is nested donation handled?
 
+ - Once lock acquire is called the, there is a check to see if the hold is held. If it is held, then the thread sets the lock to wait on lock. The running thread inserts its self sorted into the holder thread's donations for multiple donations. Nested donation follows the pointer of wait_on_lock then holder then wait_on_lock etc until it reaches a null wait_on_lock, syncing the priority to the highest one. The thread blocks with sema_down(lock), the yields until the lock becomes available. Once it gets the lock wait_on_lock is set to null, become the lock holder, and continues with the donated donated until the lock is released.
+
 > B5: Describe the sequence of events when lock_release() is called
 > on a lock that a higher-priority thread is waiting for.
 
+ - When lock released it removed the donations for that lock, recalculates the highest priority of the chain of threads holding locks, and releases the lock with sema_up(lock).
+  
 ### SYNCHRONIZATION 
 
 > B6: Describe a potential race in thread_set_priority() and explain
 > how your implementation avoids it.  Can you use a lock to avoid
 > this race?
-I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
+
+ - I disabled interrupts so it doesn't recursively call sema down waiting for the lock. The base priority has to be modified, recalculate the priority, if the thread should yield the current thread if it is greater, etc in order atomically. If an interrupts splices into the execution it could crash so interrupts are disabled.
 ### RATIONALE 
 
 > B7: Why did you choose this design?  In what ways is it superior to
 > another design you considered?
-It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
+
+ - It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
 
 			   SURVEY QUESTIONS
 			   ================

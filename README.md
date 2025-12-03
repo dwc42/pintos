@@ -1,7 +1,10 @@
 clone to /pintos
 make sure the repo is not /pintos/pintos
 
-
+**Design Document** 
+```bash
+pintos/design_document.md
+```
 
 
 
