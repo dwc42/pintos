@@ -84,6 +84,18 @@ struct thread
    struct list_elem donation_elem; /*Donation list Element */
 };
 ```
+
+```c
+bool sortByPriority (const struct list_elem *a, const struct list_elem *b, void *aux);
+```
+Purpose: Comparator to sort semaphore and lock waiter lists by thread priority.
+```c
+
+bool cond_sema_priority (const struct list_elem *a,
+                         const struct list_elem *b,
+                         void *aux);
+```
+Purpose: Comparator to sort condition variable waiters based on the highest-priority thread in each semaphore.
 > B2: Explain the data structure used to track priority donation.
 > Use ASCII art to diagram a nested donation.  (Alternately, submit a
 > .png file.)
