@@ -27,9 +27,6 @@
 -->
 
 <!-- geroado-->
-<!-- geroado-->
-<!-- geroado-->
-<!-- geroado-->
 			     ALARM CLOCK
 			     ===========
 
