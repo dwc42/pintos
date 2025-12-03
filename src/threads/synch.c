@@ -38,16 +38,20 @@ struct semaphore_elem
   struct semaphore semaphore;
 };
 
+/* Returns true if thread A has strictly higher priority than thread B.
+   Used by semaphores and locks to keep waiter lists sorted so the
+   highest-priority thread is unblocked first. */
 bool sortByPriority(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED)
 {
   struct thread *ta = list_entry(a, struct thread, elem);
   struct thread *tb = list_entry(b, struct thread, elem);
 
-  // Return TRUE if a should come BEFORE b in the list
-  // Higher priority value means higher priority thread
   return ta->priority > tb->priority;
 }
 
+/* Returns true if the highest-priority thread waiting on semaphore_elem A
+   has strictly higher priority than the highest-priority thread waiting
+   on semaphore_elem B.  Used to order condition variable waiters. */
 bool cond_sema_priority(const struct list_elem *a, const struct list_elem *b, void *aux UNUSED)
 {
   struct semaphore_elem *sa = list_entry(a, struct semaphore_elem, elem);

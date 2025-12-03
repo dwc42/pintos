@@ -140,6 +140,7 @@ struct thread
    struct list_elem donation_elem; /*Donation list Element */
 };
 ```
+
 > B2: Explain the data structure used to track priority donation.
 > Use ASCII art to diagram a nested donation.  (Alternately, submit a
 > .png file.)
