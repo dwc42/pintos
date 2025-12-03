@@ -18,7 +18,7 @@
 > TAs, or extra credit, please give them here.
 
  - mlfqs-fair passing
-  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular  is fair.
+  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular is fair ie thread time in the round is about equal to the average.
 
 <!--
 > Please cite any offline or online sources you consulted while
