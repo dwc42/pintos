@@ -186,11 +186,7 @@ struct thread
 			   SURVEY QUESTIONS
 			   ================
 
-Answering these questions is optional, but it will help us improve the
-course in future quarters.  Feel free to tell us anything you
-want--these questions are just to spur your thoughts.  You may also
-choose to respond anonymously in the course evaluations at the end of
-the quarter.
+Answering these questions is optional, but it will help us improve the course in future quarters.  Feel free to tell us anything you want--these questions are just to spur your thoughts.  You may also choose to respond anonymously in the course evaluations at the end of the quarter.
 
 > In your opinion, was this assignment, or any one of the three problems
 > in it, too easy or too hard?  Did it take too long or too little time?
