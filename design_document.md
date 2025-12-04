@@ -18,8 +18,10 @@
 > TAs, or extra credit, please give them here.
 
  - mlfqs-fair passing
-  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular is fair ie thread time in the round is about equal to the average.
-
+  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular is fair ie thread time in the round is about equal to the average.  
+     
+      
+      
 <!--
 > Please cite any offline or online sources you consulted while
 > preparing your submission, other than the Pintos documentation, course
@@ -30,6 +32,7 @@
 <!-- geroado-->
 <!-- geroado-->
 <!-- geroado-->
+
 			     ALARM CLOCK
 			     ===========
 
@@ -182,23 +185,3 @@ struct thread
 > another design you considered?
 
  - It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
-
-			   SURVEY QUESTIONS
-			   ================
-
-Answering these questions is optional, but it will help us improve the course in future quarters.  Feel free to tell us anything you want--these questions are just to spur your thoughts.  You may also choose to respond anonymously in the course evaluations at the end of the quarter.
-
-> In your opinion, was this assignment, or any one of the three problems
-> in it, too easy or too hard?  Did it take too long or too little time?
-
-> Did you find that working on a particular part of the assignment gave
-> you greater insight into some aspect of OS design?
-
-> Is there some particular fact or hint we should give students in
-> future quarters to help them solve the problems?  Conversely, did you
-> find any of our guidance to be misleading?
-
-> Do you have any suggestions for the TAs to more effectively assist
-> students, either for future quarters or the remaining projects?
-
-> Any other comments?
