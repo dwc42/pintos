@@ -18,8 +18,10 @@
 > TAs, or extra credit, please give them here.
 
  - mlfqs-fair passing
-  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular is fair ie thread time in the round is about equal to the average.
-
+  tests/threads/mlfqs-fair-2 and tests/threads/mlfqs-fair-20 are passing since it doesn't check if the nice value is set during the test so all the test is checking if the round robin schedular is fair ie thread time in the round is about equal to the average.  
+     
+      
+      
 <!--
 > Please cite any offline or online sources you consulted while
 > preparing your submission, other than the Pintos documentation, course
@@ -27,6 +29,13 @@
 -->
 
 <!-- geroado-->
+<<<<<<< HEAD
+=======
+<!-- geroado-->
+<!-- geroado-->
+<!-- geroado-->
+
+>>>>>>> 14f36eebcb4624a85ddddf0162a26c575931f4b0
 			     ALARM CLOCK
 			     ===========
 
@@ -138,15 +147,6 @@ struct thread
 };
 ```
 
-```c
-bool sortByPriority (const struct list_elem *a, const struct list_elem *b, void *aux);
-```
-Purpose: Comparator to sort semaphore and lock waiter lists by thread priority.
-```c
-
-bool cond_sema_priority (const struct list_elem *a, const struct list_elem *b, void *aux);
-```
-Purpose: Comparator to sort condition variable waiters based on the highest-priority thread in each semaphore.
 > B2: Explain the data structure used to track priority donation.
 > Use ASCII art to diagram a nested donation.  (Alternately, submit a
 > .png file.)
@@ -162,6 +162,8 @@ Purpose: Comparator to sort condition variable waiters based on the highest-prio
 
 > B3: How do you ensure that the highest priority thread waiting for
 > a lock, semaphore, or condition variable wakes up first?
+
+ - We ensure the highest-priority thread wakes first by inserting waiting threads into each semaphore or condition variable's waiters list in strict priority order using comparator functions. We re-sort the waiters list before unblocking a thread in case there are any changes in priority that occur while threads are blocked. Since the list is always maintained in a sorted order, removal of the front element always wakes the highest-priority waiting thread.
 
 > B4: Describe the sequence of events when a call to lock_acquire()
 > causes a priority donation.  How is nested donation handled?
@@ -186,27 +188,3 @@ Purpose: Comparator to sort condition variable waiters based on the highest-prio
 > another design you considered?
 
  - It implements priority scheduling with donation which before pintos uses a First Come First serve approach. The design prevents priority inversion by donating priority to lower priority threads preventing starvation of higher priority threads. The wait on lock field allow donation to happen in nest chains. 
-
-			   SURVEY QUESTIONS
-			   ================
-
-Answering these questions is optional, but it will help us improve the
-course in future quarters.  Feel free to tell us anything you
-want--these questions are just to spur your thoughts.  You may also
-choose to respond anonymously in the course evaluations at the end of
-the quarter.
-
-> In your opinion, was this assignment, or any one of the three problems
-> in it, too easy or too hard?  Did it take too long or too little time?
-
-> Did you find that working on a particular part of the assignment gave
-> you greater insight into some aspect of OS design?
-
-> Is there some particular fact or hint we should give students in
-> future quarters to help them solve the problems?  Conversely, did you
-> find any of our guidance to be misleading?
-
-> Do you have any suggestions for the TAs to more effectively assist
-> students, either for future quarters or the remaining projects?
-
-> Any other comments?
